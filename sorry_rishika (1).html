@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Rishika 🩷</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #fff0f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ---- particle layer ---- */
+  #pLayer {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+  .fp {
+    position: absolute;
+    animation: fp-float linear forwards;
+    opacity: 0;
+  }
+  @keyframes fp-float {
+    0%   { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+    8%   { opacity: 0.7; }
+    90%  { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-500px) scale(1.1) rotate(25deg); }
+  }
+  .spark {
+    position: absolute;
+    animation: sparkle ease-in-out infinite;
+    color: #F4C0D1;
+  }
+  @keyframes sparkle {
+    0%,100% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50%     { opacity: 1; transform: scale(1) rotate(20deg); }
+  }
+
+  /* ---- screens ---- */
+  #app {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 480px;
+    padding: 2rem 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+  }
+  .screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    animation: fadeUp 0.65s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .screen.active { display: flex; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- PAGE 1 ---- */
+  .pg1-ring {
+    width: 118px; height: 118px; border-radius: 50%;
+    border: 2.5px solid #F4C0D1;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.4rem;
+    animation: ringPulse 2s ease-in-out infinite;
+    background: #fff8fb;
+  }
+  @keyframes ringPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(212,83,126,0.3); }
+    50%     { box-shadow: 0 0 0 18px rgba(212,83,126,0); }
+  }
+  .big-heart { font-size: 60px; animation: heartbeat 1.1s ease-in-out infinite; display: block; }
+  @keyframes heartbeat {
+    0%,100%{ transform: scale(1); }
+    15%    { transform: scale(1.22); }
+    30%    { transform: scale(1); }
+    45%    { transform: scale(1.14); }
+    60%    { transform: scale(1); }
+  }
+  .pg1-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    color: #D4537E; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .pg1-title {
+    font-size: 34px; font-weight: 600; color: #2c1a22;
+    line-height: 1.2; margin-bottom: 2px;
+  }
+  .pg1-name {
+    font-size: 42px; font-weight: 700; color: #D4537E;
+    animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) both 0.3s;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.2) rotate(-12deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  .dots-row { display: flex; gap: 7px; justify-content: center; margin: 1rem 0 1.8rem; }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #F4C0D1; animation: dotPop 1.4s ease-in-out infinite;
+  }
+  .dot:nth-child(2){ animation-delay: 0.2s; }
+  .dot:nth-child(3){ animation-delay: 0.4s; }
+  @keyframes dotPop {
+    0%,100% { transform: scale(1); background: #F4C0D1; }
+    50%     { transform: scale(1.6); background: #D4537E; }
+  }
+
+  /* ---- buttons ---- */
+  .btn-yes {
+    padding: 15px 44px;
+    background: #D4537E; border: none;
+    border-radius: 50px; color: #fff;
+    font-size: 16px; font-weight: 500;
+    cursor: pointer; transition: transform 0.15s, background 0.15s;
+    margin-bottom: 12px; width: 100%; max-width: 290px;
+  }
+  .btn-yes:hover { background: #b83f68; transform: scale(1.04); }
+  .btn-no {
+    padding: 12px 28px; background: transparent;
+    border: 1.5px solid #e8b4c8;
+    border-radius: 50px; color: #993556;
+    font-size: 14px; cursor: pointer; transition: all 0.15s;
+    width: 100%; max-width: 290px;
+  }
+  .btn-no:hover { background: #fdf0f5; }
+
+  /* ---- PAGE 2 ---- */
+  .sure-emoji {
+    font-size: 60px; display: block; margin-bottom: 1rem;
+    animation: wobble 1.5s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%,100% { transform: rotate(0); }
+    25%     { transform: rotate(-10deg); }
+    75%     { transform: rotate(10deg); }
+  }
+  .sure-title { font-size: 26px; font-weight: 600; color: #2c1a22; margin-bottom: 8px; }
+  .sure-sub   { font-size: 15px; color: #7a4a5a; margin-bottom: 1.8rem; line-height: 1.7; }
+
+  /* ---- PAGE 3 ---- */
+  .iknow-emoji { font-size: 66px; display: block; margin-bottom: 1rem; animation: spinBounce 1.2s ease-in-out infinite; }
+  @keyframes spinBounce {
+    0%,100% { transform: rotate(-10deg) scale(1); }
+    50%     { transform: rotate(10deg) scale(1.15); }
+  }
+  .iknow-title { font-size: 30px; font-weight: 600; color: #D4537E; }
+  .iknow-sub   { font-size: 16px; color: #7a4a5a; margin-top: 10px; }
+
+  /* ---- PAGE 4 ---- */
+  .lh-emoji  { font-size: 44px; margin-bottom: 8px; animation: heartbeat 1.3s ease-in-out infinite; display: block; }
+  .lh-title  { font-size: 22px; font-weight: 600; color: #2c1a22; }
+  .lh-sub    { font-size: 13px; color: #a06080; margin-top: 4px; margin-bottom: 1.2rem; }
+
+  .letter-card {
+    background: #fff;
+    border: 1.5px solid #F4C0D1;
+    border-radius: 18px;
+    padding: 1.8rem 1.8rem 1.4rem;
+    text-align: left;
+    margin-bottom: 1.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .letter-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #F4C0D1, #D4537E, #F4C0D1);
+  }
+  .letter-quote { font-size: 44px; color: #F4C0D1; line-height: 0.7; display: block; margin-bottom: 12px; }
+  .letter-text  { font-size: 15px; color: #2c1a22; line-height: 1.9; }
+  .letter-sign  { font-size: 14px; color: #D4537E; margin-top: 14px; font-style: italic; }
+
+  /* ---- PAGE 5 ---- */
+  .love-badge {
+    background: #FBEAF0; border: 1px solid #F4C0D1;
+    border-radius: 50px; padding: 5px 20px;
+    font-size: 11px; font-weight: 600; color: #993556;
+    letter-spacing: 1.8px; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .love-big-heart { font-size: 74px; display: block; animation: heartbeat 0.9s ease-in-out infinite; margin-bottom: 1rem; }
+  .love-title { font-size: 34px; font-weight: 700; color: #D4537E; line-height: 1.2; margin-bottom: 10px; }
+  .love-sub   { font-size: 17px; color: #7a4a5a; margin-bottom: 1.4rem; }
+  .love-grid  {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; width: 100%; max-width: 320px; margin-top: 0.5rem;
+  }
+  .love-pill {
+    background: #FBEAF0; border: 1px solid #F4C0D1;
+    border-radius: 50px; padding: 11px 6px;
+    font-size: 13px; color: #72243E;
+    animation: fadeUp 0.6s ease both;
+  }
+</style>
+</head>
+<body>
+
+<div id="pLayer"></div>
+
+<div id="app">
+
+  <!-- PAGE 1: sorry -->
+  <div class="screen active" id="s-sorry">
+    <div class="pg1-ring"><span class="big-heart">❤️</span></div>
+    <div class="pg1-label">a message just for you</div>
+    <div class="pg1-title">I am so sorry,</div>
+    <div class="pg1-name">Rishika 🩷</div>
+    <div class="dots-row"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <button class="btn-yes" onclick="gotoIknow()">I forgive you ❤️</button>
+    <button class="btn-no" onclick="gotoSure()">Hmm… not yet</button>
+  </div>
+
+  <!-- PAGE 2: are you sure -->
+  <div class="screen" id="s-sure">
+    <span class="sure-emoji">🥺</span>
+    <div class="sure-title">Are you sure though?</div>
+    <p class="sure-sub">I know I messed up… but please give me a chance.<br>I really really mean it. 🙏💗</p>
+    <button class="btn-yes" onclick="gotoIknow()" style="margin-bottom:12px">Ok fine, I forgive you 💗</button>
+    <button class="btn-no" onclick="gotoSorry()">Still not forgiving</button>
+  </div>
+
+  <!-- PAGE 3: i knew it -->
+  <div class="screen" id="s-iknow">
+    <span class="iknow-emoji">💝</span>
+    <div class="iknow-title">I knew you loved me 😏</div>
+    <div class="iknow-sub">Because I love you too 🩷</div>
+  </div>
+
+  <!-- PAGE 4: apology letter -->
+  <div class="screen" id="s-apology">
+    <span class="lh-emoji">🙏</span>
+    <div class="lh-title">From my heart to yours</div>
+    <div class="lh-sub">please read this carefully 🩷</div>
+    <div class="letter-card">
+      <span class="letter-quote">&ldquo;</span>
+      <div class="letter-text">
+        Hey, I've been thinking about how I've been acting. I've had a lot on my plate, but I shouldn't have let it affect how I treat you. I've had a lot on my mind, but that's not an excuse to be moody with you. I'm really sorry for acting like that.
+      </div>
+      <div class="letter-sign">— always yours 🩷</div>
+    </div>
+    <button class="btn-yes" onclick="gotoLove()">It's ok, I forgive you ❤️</button>
+  </div>
+
+  <!-- PAGE 5: love -->
+  <div class="screen" id="s-love">
+    <span class="love-big-heart">❤️</span>
+    <div class="love-badge">forever &amp; always</div>
+    <div class="love-title">I love you<br>so much 🩷</div>
+    <p class="love-sub">You are literally the best person ever ✨</p>
+    <div class="love-grid">
+      <div class="love-pill" style="animation-delay:0.1s">my favourite 🌸</div>
+      <div class="love-pill" style="animation-delay:0.2s">my person 💗</div>
+      <div class="love-pill" style="animation-delay:0.3s">my everything 💝</div>
+      <div class="love-pill" style="animation-delay:0.4s">so beautiful ✨</div>
+      <div class="love-pill" style="animation-delay:0.5s">my sunshine 🌷</div>
+      <div class="love-pill" style="animation-delay:0.6s">my world 🌍</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  el.classList.add('active');
+}
+function gotoSorry() { show('s-sorry'); }
+function gotoSure()  { show('s-sure'); }
+function gotoIknow() {
+  show('s-iknow');
+  spawnBurst(16);
+  setTimeout(() => show('s-apology'), 1500);
+}
+function gotoLove() {
+  show('s-love');
+  spawnBurst(30);
+}
+
+const emojis = ['❤️','🩷','💗','💖','💝','✨','🌸','🌷'];
+function makeParticle(forced) {
+  const p = document.createElement('div');
+  p.className = 'fp';
+  p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  p.style.left   = Math.random() * 93 + '%';
+  p.style.bottom = '-20px';
+  p.style.fontSize = (13 + Math.random() * 15) + 'px';
+  const dur = forced ? (1.6 + Math.random() * 1.8) : (4 + Math.random() * 4);
+  p.style.animationDuration = dur + 's';
+  p.style.animationDelay   = (forced ? 0 : Math.random() * 0.5) + 's';
+  document.getElementById('pLayer').appendChild(p);
+  setTimeout(() => p.remove(), (dur + 1.5) * 1000);
+}
+function spawnBurst(n) {
+  for (let i = 0; i < n; i++) setTimeout(() => makeParticle(true), i * 60);
+}
+(function bgLoop() {
+  makeParticle(false);
+  setTimeout(bgLoop, 900 + Math.random() * 700);
+})();
+
+function makeSpark() {
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.textContent = ['✦','✧','⋆','·'][Math.floor(Math.random() * 4)];
+  s.style.cssText = `left:${Math.random()*95}%;top:${5+Math.random()*85}%;font-size:${10+Math.random()*12}px;animation-duration:${1.5+Math.random()*2.5}s;animation-delay:${Math.random()*2}s`;
+  document.getElementById('pLayer').appendChild(s);
+  setTimeout(() => s.remove(), 6000);
+}
+setInterval(makeSpark, 550);
+for (let i = 0; i < 8; i++) makeSpark();
+</script>
+</body>
+</html>
